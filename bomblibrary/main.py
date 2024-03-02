@@ -1,16 +1,27 @@
-# This is a sample Python script.
+import requests as rq
+from tqdm import tqdm
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+def main():
 
+    url = "https://drive.usercontent.google.com/download?id=1-DBKQE781Srff7_mjManONfDNU2_UplL&export=download&confirm=t&uuid=c69f5bc5-2fdf-418d-b421-6f9eb333ba9c&at=APZUnTVIhFUteDEZnPOH5dCRMBdH%3A1708075075180"
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    resp = rq.get(url, stream=True)
 
+    # Check if the request was successful
+    if resp.status_code == 200:
+        file_size = int(resp.headers.get('content-length', 0))
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+        # Initialize the progress bar with the total file size
+        progress = tqdm(total=file_size, unit='B', unit_scale=True)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        with open("DeepForest_Model", "wb") as file:
+            for chunk in resp.iter_content(chunk_size=1024):
+                # Write each chunk of data to the file
+                file.write(chunk)
+                # Update the progress bar with the size of the current chunk
+                progress.update(len(chunk))
+
+        progress.close()
+        print("Download complete")
+    else:
+        print("Failed to download file. Status code:", resp.status_code)
