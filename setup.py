@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="<libname>",
+    name="bomb-library",
     version="0.0.1",
-    author="<author>",
-    author_email="<author_email>",
+    author="Ann",
+    author_email="<anastasiatrifan@gmail.com>",
     url="",
-    description="Description of lib",
+    description="calculate number of trees",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -14,5 +14,5 @@ setup(
         "Operating System :: OS Independent",
     ],
 
-    entry_points={"console_scripts": ["<libname> = <libname>.main:download"]},
+    entry_points={"console_scripts": ["bomb-library = bomb-library.main:download"]},
 )
