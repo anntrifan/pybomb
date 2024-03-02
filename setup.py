@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="bomb-library",
+    name="bomblibrary",
     version="0.0.1",
     author="Ann",
     author_email="<anastasiatrifan@gmail.com>",
@@ -14,5 +14,5 @@ setup(
         "Operating System :: OS Independent",
     ],
 
-    entry_points={"console_scripts": ["bomb-library = bomb-library.main:download"]},
+    entry_points={"console_scripts": ["bomblibrary = bomblibrary.main:main"]},
 )
